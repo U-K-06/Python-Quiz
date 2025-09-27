@@ -25,48 +25,50 @@
   --color-correct: #34d399
   
 }
-body{
-  @keyframes fall {
+@keyframes fall {
   0% {
-    transform: translateY(-10vh) translateX(0vw);
-    opacity: 1;
+    transform: translateY(-10vh);
+    opacity: 0.6;
   }
   100% {
-    transform: translateY(100vh) translateX(20vw);
-    opacity: 0.4;
+    transform: translateY(100vh);
+    opacity: 0.1;
   }
 }
 
 .fall-slow {
-  animation: fall 12s linear infinite;
+  animation: fall 12s ease-in-out infinite;
 }
 
 .fall-medium {
-  animation: fall 8s linear infinite;
+  animation: fall 8s ease-in-out infinite;
 }
 
 .fall-fast {
-  animation: fall 5s linear infinite;
+  animation: fall 5s ease-in-out infinite;
 }
 
 .falling-question-mark {
   position: absolute;
-  font-size: 3rem; /* Example size */
-  color: #3b82f6; /* Example color (blue-500) */
+  font-size: 3rem; 
+  color: #34d399; 
   pointer-events: none;
-  /* Add more specific positioning and delay classes in your HTML or via JS */
 }
 
-/* Example of how you would use a delay on a specific element */
 .delay-1 {
   animation-delay: 1s;
 }
 
 .delay-5 {
-  animation-delay: 5s;
+  animation-delay: 3s;
 }
-  background-color: var(--color-background);
-  color:var(--color-text-primary);
+
+.delay-2 {
+  animation-delay: 2s;
+}
+
+.delay-4 {
+  animation-delay: 4s;
 }
 body{
   
