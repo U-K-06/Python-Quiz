@@ -1,0 +1,75 @@
+@import "tailwindcss";
+
+@theme {
+  /* Main background color */
+  --color-background: #0b0d12;
+
+  /* Primary color for buttons and highlights */
+  --color-primary: #3b82f6;
+
+  /* Primary text color for readability on dark background */
+  --color-text-primary: #f3f4f6;
+
+  /* Secondary text color for helper text or less emphasis */
+  --color-text-secondary: #9ca3af;
+
+  /* Color for indicating correct answers */
+  --color-correct: #34d399;
+
+  /* Color for indicating wrong answers */
+  --color-wrong: #f87171;
+
+  /* Border color for cards or dividers */
+  --color-border: #374151;
+
+  --color-correct: #34d399
+  
+}
+body{
+  @keyframes fall {
+  0% {
+    transform: translateY(-10vh) translateX(0vw);
+    opacity: 1;
+  }
+  100% {
+    transform: translateY(100vh) translateX(20vw);
+    opacity: 0.4;
+  }
+}
+
+.fall-slow {
+  animation: fall 12s linear infinite;
+}
+
+.fall-medium {
+  animation: fall 8s linear infinite;
+}
+
+.fall-fast {
+  animation: fall 5s linear infinite;
+}
+
+.falling-question-mark {
+  position: absolute;
+  font-size: 3rem; /* Example size */
+  color: #3b82f6; /* Example color (blue-500) */
+  pointer-events: none;
+  /* Add more specific positioning and delay classes in your HTML or via JS */
+}
+
+/* Example of how you would use a delay on a specific element */
+.delay-1 {
+  animation-delay: 1s;
+}
+
+.delay-5 {
+  animation-delay: 5s;
+}
+  background-color: var(--color-background);
+  color:var(--color-text-primary);
+}
+body{
+  
+  background-color: var(--color-background);
+  color:var(--color-text-primary);
+}
