@@ -21,6 +21,12 @@
 
   /* Border color for cards or dividers */
   --color-border: #374151;
+
+  /* Background for the main container holding the question */
+  --color-card-question: #1f2937; /* A slightly lighter gray/blue than background */
+
+  /* Default background for unselected quiz options/buttons */
+  --color-card-option-default: #111827; /* Darker, clearly different from the question card */
   
 }
 @keyframes fall {
@@ -69,6 +75,8 @@
   animation-delay: 4s;
 }
 body{
+  padding: 0;
+  margin: 0;
   
   background-color: var(--color-background);
   color:var(--color-text-primary);
