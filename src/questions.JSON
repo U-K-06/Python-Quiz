@@ -1,3 +1,282 @@
-{
-    
-}
+[
+  {
+    "topic_id": 0,
+    "topic_name": "Strings",
+    "questions": [
+      {
+        "id": 101,
+        "type": "multiple_choice",
+        "question": "What is the result of 'Hello' * 3?",
+        "explanation": "The multiplication operator (`*`) concatenates the string with itself the specified number of times.",
+        "options": [
+          {"text": "HelloHelloHello", "is_correct": true},
+          {"text": "Error", "is_correct": false},
+          {"text": "Hello 3", "is_correct": false}
+        ]
+      },
+      {
+        "id": 102,
+        "type": "true_false",
+        "question": "Strings in Python are mutable (meaning they can be changed after creation).",
+        "explanation": "Strings are immutable. Methods like `.replace()` return a *new* string; they do not change the original.",
+        "is_correct": false
+      }
+    ]
+  },
+  {
+    "topic_id": 1,
+    "topic_name": "Lists",
+    "questions": [
+      {
+        "id": 201,
+        "type": "multiple_choice",
+        "question": "Which index would you use to access the number 3 in the list `[1, 2, 3, 4]`?",
+        "explanation": "Lists use zero-based indexing. The number 3 is at index 2 (0:1, 1:2, 2:3).",
+        "options": [
+          {"text": "3", "is_correct": false},
+          {"text": "2", "is_correct": true},
+          {"text": "-1", "is_correct": false}
+        ]
+      },
+      {
+        "id": 202,
+        "type": "multiple_choice",
+        "question": "What is the primary difference between the list methods `.append()` and `.extend()`?",
+        "explanation": "`.append()` adds the entire argument as a single element. `.extend()` adds the elements of an iterable (like another list) to the end of the current list.",
+        "options": [
+          {"text": "`.append()` returns the list, `.extend()` does not.", "is_correct": false},
+          {"text": "`.append()` adds one element, `.extend()` adds all elements from an iterable.", "is_correct": true},
+          {"text": "`.extend()` is faster for single elements.", "is_correct": false}
+        ]
+      }
+    ]
+  },
+  {
+    "topic_id": 2,
+    "topic_name": "Dictionaries",
+    "questions": [
+      {
+        "id": 301,
+        "type": "multiple_choice",
+        "question": "What happens if you try to access a non-existent key in a dictionary using the `.get()` method?",
+        "explanation": "`.get()` is the safe way to access keys; it returns `None` by default if the key is not found, preventing a `KeyError`.",
+        "options": [
+          {"text": "A `KeyError` is raised.", "is_correct": false},
+          {"text": "The string 'None' is returned.", "is_correct": false},
+          {"text": "The value `None` is returned.", "is_correct": true}
+        ]
+      },
+      {
+        "id": 302,
+        "type": "true_false",
+        "question": "Dictionary keys must always be strings.",
+        "explanation": "Dictionary keys must be an immutable type, which includes strings, numbers, and tuples, but not lists or dictionaries.",
+        "is_correct": false
+      }
+    ]
+  },
+  {
+    "topic_id": 3,
+    "topic_name": "List Comprehension",
+    "questions": [
+      {
+        "id": 401,
+        "type": "multiple_choice",
+        "question": "Which list comprehension correctly generates the list `[0, 1, 4, 9]`?",
+        "explanation": "The expression squares the numbers from 0 up to (but not including) 4.",
+        "options": [
+          {"text": "[x for x in range(4)]", "is_correct": false},
+          {"text": "[x**2 for x in range(4)]", "is_correct": true},
+          {"text": "[x*x for x in range(1, 5)]", "is_correct": false}
+        ]
+      },
+      {
+        "id": 402,
+        "type": "true_false",
+        "question": "You can include an `if` condition within a list comprehension.",
+        "explanation": "Yes, an `if` condition is used at the end of the expression to filter the elements.",
+        "is_correct": true
+      }
+    ]
+  },
+  {
+    "topic_id": 4,
+    "topic_name": "Sets",
+    "questions": [
+      {
+        "id": 501,
+        "type": "multiple_choice",
+        "question": "Which method is used to add a single element to a set?",
+        "explanation": "The `.add()` method is used to insert one item into a set.",
+        "options": [
+          {"text": ".append()", "is_correct": false},
+          {"text": ".insert()", "is_correct": false},
+          {"text": ".add()", "is_correct": true}
+        ]
+      },
+      {
+        "id": 502,
+        "type": "true_false",
+        "question": "A set is guaranteed to maintain the order in which elements were added.",
+        "explanation": "Sets are unordered collections, so the display order is not guaranteed and can change.",
+        "is_correct": false
+      }
+    ]
+  },
+  {
+    "topic_id": 5,
+    "topic_name": "Functions",
+    "questions": [
+      {
+        "id": 601,
+        "type": "multiple_choice",
+        "question": "What is the term for a value passed into a function when it is called?",
+        "explanation": "The value passed during the call is an **argument**, while the name defined in the function signature is a **parameter**.",
+        "options": [
+          {"text": "Parameter", "is_correct": false},
+          {"text": "Argument", "is_correct": true},
+          {"text": "Attribute", "is_correct": false}
+        ]
+      },
+      {
+        "id": 602,
+        "type": "true_false",
+        "question": "If a Python function doesn't explicitly use the `return` keyword, it returns `0` by default.",
+        "explanation": "A function that reaches the end of its block without a `return` statement automatically returns the value `None`.",
+        "is_correct": false
+      }
+    ]
+  },
+  {
+    "topic_id": 6,
+    "topic_name": "OOP (Basics)",
+    "questions": [
+      {
+        "id": 701,
+        "type": "multiple_choice",
+        "question": "The special method that is called automatically when a new object is created is named what?",
+        "explanation": "The `__init__` method is the constructor in Python classes.",
+        "options": [
+          {"text": "__new__", "is_correct": false},
+          {"text": "__create__", "is_correct": false},
+          {"text": "__init__", "is_correct": true}
+        ]
+      },
+      {
+        "id": 702,
+        "type": "multiple_choice",
+        "question": "In Python OOP, what is an 'Instance'?",
+        "explanation": "An instance is a specific object built from the class blueprint.",
+        "options": [
+          {"text": "A blueprint for objects.", "is_correct": false},
+          {"text": "The class definition file.", "is_correct": false},
+          {"text": "A specific object of a class.", "is_correct": true}
+        ]
+      }
+    ]
+  },
+  {
+    "topic_id": 7,
+    "topic_name": "OOP (Advanced)",
+    "questions": [
+      {
+        "id": 801,
+        "type": "multiple_choice",
+        "question": "Which OOP principle allows a subclass to inherit methods and attributes from a superclass?",
+        "explanation": "Inheritance is the mechanism by which one class acquires the properties of another.",
+        "options": [
+          {"text": "Polymorphism", "is_correct": false},
+          {"text": "Inheritance", "is_correct": true},
+          {"text": "Encapsulation", "is_correct": false}
+        ]
+      },
+      {
+        "id": 802,
+        "type": "true_false",
+        "question": "Private methods in a Python class are strictly inaccessible from outside the class.",
+        "explanation": "In Python, methods prefixed with double underscores (`__`) are 'name-mangled' but can technically still be accessed, unlike in truly private languages.",
+        "is_correct": false
+      }
+    ]
+  },
+  {
+    "topic_id": 8,
+    "topic_name": "Pathlib",
+    "questions": [
+      {
+        "id": 901,
+        "type": "multiple_choice",
+        "question": "To get just the filename without the full path using a `Path` object, which attribute do you use?",
+        "explanation": "The `.name` attribute returns the final path component (the file or folder name).",
+        "options": [
+          {"text": ".path", "is_correct": false},
+          {"text": ".filename", "is_correct": false},
+          {"text": ".name", "is_correct": true}
+        ]
+      },
+      {
+        "id": 902,
+        "type": "multiple_choice",
+        "question": "What does the division operator (`/`) do when used between two `Path` objects (or strings) in `Pathlib`?",
+        "explanation": "The operator is overloaded to correctly construct a new path by joining the segments.",
+        "options": [
+          {"text": "It performs string division.", "is_correct": false},
+          {"text": "It joins the path segments.", "is_correct": true},
+          {"text": "It raises a TypeError.", "is_correct": false}
+        ]
+      }
+    ]
+  },
+  {
+    "topic_id": 9,
+    "topic_name": "Requests Library",
+    "questions": [
+      {
+        "id": 1001,
+        "type": "multiple_choice",
+        "question": "How do you access the content of a successful HTTP response using the `requests` library?",
+        "explanation": "The `.text` attribute contains the content of the response body as a string.",
+        "options": [
+          {"text": "response.data", "is_correct": false},
+          {"text": "response.content()", "is_correct": false},
+          {"text": "response.text", "is_correct": true}
+        ]
+      },
+      {
+        "id": 1002,
+        "type": "multiple_choice",
+        "question": "Which method is used to send data to a server (e.g., submitting a form)?",
+        "explanation": "The POST method is the standard way to send data to be processed or created by a server.",
+        "options": [
+          {"text": "requests.get()", "is_correct": false},
+          {"text": "requests.pull()", "is_correct": false},
+          {"text": "requests.post()", "is_correct": true}
+        ]
+      }
+    ]
+  },
+  {
+    "topic_id": 10,
+    "topic_name": "JSON Library",
+    "questions": [
+      {
+        "id": 1101,
+        "type": "multiple_choice",
+        "question": "The `json.loads()` function converts JSON data from which source into a Python object?",
+        "explanation": "The 's' in `loads` stands for 'string'; it parses a JSON formatted string.",
+        "options": [
+          {"text": "A file handle", "is_correct": false},
+          {"text": "A network stream", "is_correct": false},
+          {"text": "A JSON formatted string", "is_correct": true}
+        ]
+      },
+      {
+        "id": 1102,
+        "type": "true_false",
+        "question": "Python's `json` library can successfully serialize a `set` directly to a JSON object.",
+        "explanation": "JSON does not have a native type for Python sets; attempting to serialize a set will raise a `TypeError`.",
+        "is_correct": false
+      }
+    ]
+  }
+]
