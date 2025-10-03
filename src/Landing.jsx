@@ -152,18 +152,21 @@ function Landing() {
   </li>
 </ul>
 <div className={`flex justify-center mt-10 mb-8 w-full ${isSubmitDisabled?'opacity-50 pointer-events-none':''}`}> 
-    <Link 
-      to={'./Questions'} 
-      className={
-        'bg-primary ' + 
-        'inline-block px-10 py-4 w-fit ' +
-        'rounded-lg text-2xl font-bold text-gray-100 ' +
-        'shadow-2xl tracking-wider ' +
-        'hover:bg-blue-600 active:scale-[0.98] transition-all duration-200'
-      } 
-      state={{selectedCats:selected}}>
-      Start the Quiz!
-    </Link>
+<Link
+  key={isSelected.join('')}  
+  to="/Questions"
+  state={{ selectedCats: isSelected }}
+  className={
+    'bg-primary ' +
+    'inline-block px-10 py-4 w-fit ' +
+    'rounded-lg text-2xl font-bold text-gray-100 ' +
+    'shadow-2xl tracking-wider ' +
+    'hover:bg-blue-600 active:scale-[0.98] transition-all duration-200'
+  }
+>
+  Go to Questions
+</Link>
+
 </div>
 
 <footer className='bg-card-option-default py-4 mt-auto fixed bottom-0 w-full left-0 items-center'>

@@ -11,15 +11,21 @@
         "options": [
           {"text": "HelloHelloHello", "is_correct": true},
           {"text": "Error", "is_correct": false},
-          {"text": "Hello 3", "is_correct": false}
+          {"text": "Hello 3", "is_correct": false},
+          {"text": "'Hello'*3", "is_correct": false}
         ]
       },
       {
         "id": 102,
-        "type": "true_false",
+        "type": "multiple_choice",
         "question": "Strings in Python are mutable (meaning they can be changed after creation).",
         "explanation": "Strings are immutable. Methods like `.replace()` return a *new* string; they do not change the original.",
-        "is_correct": false
+        "options": [
+          {"text": "True, they can be modified in place.", "is_correct": false},
+          {"text": "False, strings are immutable.", "is_correct": true},
+          {"text": "True, using slicing assignment.", "is_correct": false},
+          {"text": "False, only integers and floats are mutable.", "is_correct": false}
+        ]
       }
     ]
   },
@@ -35,7 +41,8 @@
         "options": [
           {"text": "3", "is_correct": false},
           {"text": "2", "is_correct": true},
-          {"text": "-1", "is_correct": false}
+          {"text": "-1", "is_correct": false},
+          {"text": "4", "is_correct": false}
         ]
       },
       {
@@ -46,7 +53,8 @@
         "options": [
           {"text": "`.append()` returns the list, `.extend()` does not.", "is_correct": false},
           {"text": "`.append()` adds one element, `.extend()` adds all elements from an iterable.", "is_correct": true},
-          {"text": "`.extend()` is faster for single elements.", "is_correct": false}
+          {"text": "`.extend()` is faster for single elements.", "is_correct": false},
+          {"text": "`.extend()` works only on tuples.", "is_correct": false}
         ]
       }
     ]
@@ -63,15 +71,21 @@
         "options": [
           {"text": "A `KeyError` is raised.", "is_correct": false},
           {"text": "The string 'None' is returned.", "is_correct": false},
-          {"text": "The value `None` is returned.", "is_correct": true}
+          {"text": "The value `None` is returned.", "is_correct": true},
+          {"text": "The dictionary is automatically updated with the new key.", "is_correct": false}
         ]
       },
       {
         "id": 302,
-        "type": "true_false",
+        "type": "multiple_choice",
         "question": "Dictionary keys must always be strings.",
         "explanation": "Dictionary keys must be an immutable type, which includes strings, numbers, and tuples, but not lists or dictionaries.",
-        "is_correct": false
+        "options": [
+          {"text": "True, they must be the 'str' type.", "is_correct": false},
+          {"text": "False, any mutable type can be used.", "is_correct": false},
+          {"text": "False, any immutable type can be used.", "is_correct": true},
+          {"text": "True, but only if the values are also strings.", "is_correct": false}
+        ]
       }
     ]
   },
@@ -87,15 +101,21 @@
         "options": [
           {"text": "[x for x in range(4)]", "is_correct": false},
           {"text": "[x**2 for x in range(4)]", "is_correct": true},
-          {"text": "[x*x for x in range(1, 5)]", "is_correct": false}
+          {"text": "[x*x for x in range(1, 5)]", "is_correct": false},
+          {"text": "[x**2 for x in range(1, 4)]", "is_correct": false}
         ]
       },
       {
         "id": 402,
-        "type": "true_false",
+        "type": "multiple_choice",
         "question": "You can include an `if` condition within a list comprehension.",
         "explanation": "Yes, an `if` condition is used at the end of the expression to filter the elements.",
-        "is_correct": true
+        "options": [
+          {"text": "True, for filtering elements.", "is_correct": true},
+          {"text": "False, only nested loops are allowed.", "is_correct": false},
+          {"text": "True, but only an `if-else` block.", "is_correct": false},
+          {"text": "False, use a separate `filter()` function instead.", "is_correct": false}
+        ]
       }
     ]
   },
@@ -111,15 +131,21 @@
         "options": [
           {"text": ".append()", "is_correct": false},
           {"text": ".insert()", "is_correct": false},
-          {"text": ".add()", "is_correct": true}
+          {"text": ".add()", "is_correct": true},
+          {"text": ".union()", "is_correct": false}
         ]
       },
       {
         "id": 502,
-        "type": "true_false",
+        "type": "multiple_choice",
         "question": "A set is guaranteed to maintain the order in which elements were added.",
         "explanation": "Sets are unordered collections, so the display order is not guaranteed and can change.",
-        "is_correct": false
+        "options": [
+          {"text": "True, since Python 3.7.", "is_correct": false},
+          {"text": "False, sets are inherently unordered.", "is_correct": true},
+          {"text": "True, but only for sets of strings.", "is_correct": false},
+          {"text": "False, this is only true for dictionaries.", "is_correct": false}
+        ]
       }
     ]
   },
@@ -135,15 +161,21 @@
         "options": [
           {"text": "Parameter", "is_correct": false},
           {"text": "Argument", "is_correct": true},
-          {"text": "Attribute", "is_correct": false}
+          {"text": "Attribute", "is_correct": false},
+          {"text": "Property", "is_correct": false}
         ]
       },
       {
         "id": 602,
-        "type": "true_false",
+        "type": "multiple_choice",
         "question": "If a Python function doesn't explicitly use the `return` keyword, it returns `0` by default.",
         "explanation": "A function that reaches the end of its block without a `return` statement automatically returns the value `None`.",
-        "is_correct": false
+        "options": [
+          {"text": "True, to signify successful execution.", "is_correct": false},
+          {"text": "False, it returns the value `None`.", "is_correct": true},
+          {"text": "True, but only if the function takes no arguments.", "is_correct": false},
+          {"text": "False, it raises a `RuntimeError`.", "is_correct": false}
+        ]
       }
     ]
   },
@@ -159,7 +191,8 @@
         "options": [
           {"text": "__new__", "is_correct": false},
           {"text": "__create__", "is_correct": false},
-          {"text": "__init__", "is_correct": true}
+          {"text": "__init__", "is_correct": true},
+          {"text": "__start__", "is_correct": false}
         ]
       },
       {
@@ -170,7 +203,8 @@
         "options": [
           {"text": "A blueprint for objects.", "is_correct": false},
           {"text": "The class definition file.", "is_correct": false},
-          {"text": "A specific object of a class.", "is_correct": true}
+          {"text": "A specific object of a class.", "is_correct": true},
+          {"text": "A static method.", "is_correct": false}
         ]
       }
     ]
@@ -187,15 +221,21 @@
         "options": [
           {"text": "Polymorphism", "is_correct": false},
           {"text": "Inheritance", "is_correct": true},
-          {"text": "Encapsulation", "is_correct": false}
+          {"text": "Encapsulation", "is_correct": false},
+          {"text": "Abstraction", "is_correct": false}
         ]
       },
       {
         "id": 802,
-        "type": "true_false",
+        "type": "multiple_choice",
         "question": "Private methods in a Python class are strictly inaccessible from outside the class.",
         "explanation": "In Python, methods prefixed with double underscores (`__`) are 'name-mangled' but can technically still be accessed, unlike in truly private languages.",
-        "is_correct": false
+        "options": [
+          {"text": "True, due to the use of encapsulation.", "is_correct": false},
+          {"text": "False, they are name-mangled but accessible.", "is_correct": true},
+          {"text": "True, unless accessed via a property.", "is_correct": false},
+          {"text": "False, because all methods in Python are public.", "is_correct": false}
+        ]
       }
     ]
   },
@@ -211,7 +251,8 @@
         "options": [
           {"text": ".path", "is_correct": false},
           {"text": ".filename", "is_correct": false},
-          {"text": ".name", "is_correct": true}
+          {"text": ".name", "is_correct": true},
+          {"text": ".file", "is_correct": false}
         ]
       },
       {
@@ -222,7 +263,8 @@
         "options": [
           {"text": "It performs string division.", "is_correct": false},
           {"text": "It joins the path segments.", "is_correct": true},
-          {"text": "It raises a TypeError.", "is_correct": false}
+          {"text": "It raises a TypeError.", "is_correct": false},
+          {"text": "It finds the common root path.", "is_correct": false}
         ]
       }
     ]
@@ -239,7 +281,8 @@
         "options": [
           {"text": "response.data", "is_correct": false},
           {"text": "response.content()", "is_correct": false},
-          {"text": "response.text", "is_correct": true}
+          {"text": "response.text", "is_correct": true},
+          {"text": "response.html", "is_correct": false}
         ]
       },
       {
@@ -250,7 +293,8 @@
         "options": [
           {"text": "requests.get()", "is_correct": false},
           {"text": "requests.pull()", "is_correct": false},
-          {"text": "requests.post()", "is_correct": true}
+          {"text": "requests.post()", "is_correct": true},
+          {"text": "requests.read()", "is_correct": false}
         ]
       }
     ]
@@ -267,15 +311,21 @@
         "options": [
           {"text": "A file handle", "is_correct": false},
           {"text": "A network stream", "is_correct": false},
-          {"text": "A JSON formatted string", "is_correct": true}
+          {"text": "A JSON formatted string", "is_correct": true},
+          {"text": "A bytes object", "is_correct": false}
         ]
       },
       {
         "id": 1102,
-        "type": "true_false",
+        "type": "multiple_choice",
         "question": "Python's `json` library can successfully serialize a `set` directly to a JSON object.",
         "explanation": "JSON does not have a native type for Python sets; attempting to serialize a set will raise a `TypeError`.",
-        "is_correct": false
+        "options": [
+          {"text": "True, because sets are iterable.", "is_correct": false},
+          {"text": "False, sets must first be converted to a list or tuple.", "is_correct": true},
+          {"text": "True, but only for sets of immutable objects.", "is_correct": false},
+          {"text": "False, only dictionaries and lists are supported.", "is_correct": false}
+        ]
       }
     ]
   }
