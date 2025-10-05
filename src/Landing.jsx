@@ -154,7 +154,7 @@ function Landing() {
 <div className={`flex justify-center mt-10 mb-8 w-full ${isSubmitDisabled?'opacity-50 pointer-events-none':''}`}> 
 <Link
   key={isSelected.join('')}  
-  to="/Questions"
+  to="/Questions/:tid/:qid"
   state={{ selectedCats: isSelected }}
   className={
     'bg-primary ' +
@@ -168,12 +168,11 @@ function Landing() {
 </Link>
 
 </div>
-
 <footer className='bg-card-option-default py-4 mt-auto fixed bottom-0 w-full left-0 items-center'>
   <ul className='flex justify-evenly mb-2'>
-    <li><a href="https://github.com/U-K-06" target='_blank'><img className='w-8 h-8'  src ={githubIcon} alt="icon"/></a></li>
-    <li><a href="www.linkedin.com/in/utkarsh-khajuria-495b8831a" target='_blank'><img className='w-8 h-8' src={linkedinIcon} alt="" /></a></li>
-    <li><a href="https://x.com/UK_06__" target='_blank'><img src={xtwitterIcon} className='w-8 h-8'  alt="" /></a></li>
+    <li><a href="https://www.linkedin.com/in/utkarsh-khajuria-495b8831a" target='_blank'><img className='w-8 h-8' src={linkedinIcon} alt="LinkedIn Icon" /></a></li>
+    <li><a href="https://github.com/U-K-06" target='_blank'><img className='w-8 h-8' src={githubIcon} alt="GitHub Icon"/></a></li>
+    <li><a href="https://x.com/UK_06__" target='_blank'><img src={xtwitterIcon} className='w-8 h-8' alt="X/Twitter Icon" /></a></li>
   </ul>
 
   <div className="text-center text-sm text-text-secondary">

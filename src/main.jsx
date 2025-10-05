@@ -9,7 +9,8 @@ createRoot(document.getElementById('root')).render(
     <BrowserRouter>
     <Routes>
     <Route path="/" element={<Landing />} />
-    <Route path = "/Questions" element = {<Question/>} />
+    {/* tid-type id qid - question id */}
+    <Route path = "/Questions/:tid/:qid" element = {<Question/>} />
   </Routes> 
     </BrowserRouter>
   </StrictMode>,
