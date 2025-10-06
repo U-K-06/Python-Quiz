@@ -4,8 +4,72 @@ import  githubIcon from './assets/github.svg'
 import linkedinIcon from './assets/linkedin.svg'
 import xtwitterIcon from './assets/twitter-x.svg'
 
+import rawJsonString from './questions.JSON?raw'; 
 
+const quizData = JSON.parse(rawJsonString);
+export function select_random_topic_question(topics, data, quizData, limitKey = 0) {
+
+    const get_random_type = () => {
+        const selected_topics = topics.reduce((a, b, i) => {
+            if (b) a.push(i);
+            return a;
+        }, []);
+    
+        const end = selected_topics.length;
+        if (end === 0) return -1;
+
+        return selected_topics[Math.floor(Math.random() * end)];
+    };
+
+    const get_random_question = (qType) => {
+
+        if (data[limitKey] && data[limitKey][qType] >= 2) {
+            return -2;
+        }
+
+        const topicData = quizData.find(topic => topic.topic_id === qType);
+
+        if (!topicData || !topicData.questions) return -1;
+
+      
+        const all_ids = topicData.questions.map(q => q.id);
+
+        const used_ids = data[qType] || [];
+
+        const unused_ids = all_ids.filter(id => !used_ids.includes(id));
+
+        if (unused_ids.length === 0) {
+            return -1; 
+        }
+
+        const randomIndex = Math.floor(Math.random() * unused_ids.length);
+        return unused_ids[randomIndex];
+    };
+
+    const q_type = get_random_type();
+
+    if (q_type === -1) return { q_type: -1, q_id: -1 };
+
+    data[q_type] = data[q_type] || [];
+    data[limitKey] = data[limitKey] || {};
+    data[limitKey][q_type] = data[limitKey][q_type] || 0;
+
+    const q_id = get_random_question(q_type);
+
+    if (q_id > 0) {
+        data[limitKey][q_type]++;
+        data[q_type].push(q_id);
+    }
+
+    return { q_type, q_id };
+}
+function send_qid_tid(selected,data,quizData)
+{
+  const sent = select_random_topic_question(selected,data,quizData)
+  return `${sent['q_type']}/${sent['q_id']}`
+}
 function Landing() { 
+  const data = {}
   const total_options = 11  
   const selected = new Array(total_options).fill(0)
   const [isSelected, setIsSelected] = useState(selected)
@@ -14,8 +78,8 @@ function Landing() {
     setIsSelected(prevSelected => {
       const selected = [...prevSelected]
       selected[i] = selected[i] == 0?1:0
-      
       return selected
+
     })
   }
   useEffect(() => {
@@ -44,7 +108,7 @@ function Landing() {
         <span class="falling-question-mark fall-fast right-3/4" style={{ animationDelay: '0s' }}>?</span>
 
       </div>
-      <nav><a className='sm:text-lg lg:text-4xl md:text-2xl text-shadow-primary font-bold text-shadow-lg' href='https://github.com/U-K-06' target='_blank'>U.K. </a></nav>
+      <nav><a className='sm:text-lg lg:text-4xl md:text-2xl text-shadow-primary font-bold text-shadow-lg' href='https://github.com/U-K-06/Python-Quiz' target='_blank'>U.K. </a></nav>
       <h1 className='text-primary-text text-6xl text-centre font-bold text-center'>Ready to test your <span className='text-yellow-300'>Python</span> <span className='text-blue-400'>Knowledge?</span></h1>
       <p className='text-center sm:text-lg md:text-xl lg:text-2xl m-4'>Select the topic(s) on which you want to take the Quiz on.</p>
 <ul className='grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6 p-6'>
@@ -154,7 +218,7 @@ function Landing() {
 <div className={`flex justify-center mt-10 mb-8 w-full ${isSubmitDisabled?'opacity-50 pointer-events-none':''}`}> 
 <Link
   key={isSelected.join('')}  
-  to="/Questions/:tid/:qid"
+  to={`/Questions/${send_qid_tid(selected,data,quizData)}`}
   state={{ selectedCats: isSelected }}
   className={
     'bg-primary ' +

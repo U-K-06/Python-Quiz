@@ -2,46 +2,10 @@ import { useLocation, useParams } from "react-router-dom";
 import  githubIcon from './assets/github.svg'
 import linkedinIcon from './assets/linkedin.svg'
 import xtwitterIcon from './assets/twitter-x.svg'
-export const data = {
-}
+import * as quizModule from './questions.json';
 
-export function select_random_topic_question(topics,data,limit=2)
-{
-    const get_random_type = ()=>{
-    const selected_topics = topics.reduce((a,b,i)=>{
-    b?a.push(i):null
-    return a 
-    },[])
-    const end = selected_topics.length
-    return selected_topics[Math.floor(Math.random() * end)]
-   }
-   {/*change this data to add more questions*/}
-
-   const get_random_question =(qType)=>{
-   const ids = [
-      '101', '102', 
-      '201', '202', 
-      '301', '302', 
-      '401', '402', 
-      '501', '502', 
-      '601', '602', 
-      '701', '702', 
-      '801', '802', 
-      '901', '902', 
-      '1001', '1002', 
-      '1101', '1102'
-  ];    
-  const desired = ids.filter((i)=>i.startsWith(qType))
-  let end = desired.length
-  let result = desired[Math.floor(Math.random() * end)]
-  return (data[qType].includes(result))?get_random_question(qType):result
-  }
-  const q_type = get_random_type()
-  data[q_type] = data[q_type] || []
-  const q_id = get_random_question(q_type)
-  data[q_type].push(q_id)
-
-}
+// const quizData = JSON.parse(rawJsonString);
+// console.log("Successfully parsed JSON string!",quizData[1].questions[0].question)
 
 function Question() {
   const optionClass =
