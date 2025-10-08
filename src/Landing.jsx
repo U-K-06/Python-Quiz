@@ -109,7 +109,7 @@ function Landing() {
 
       </div>
       <nav><a className='sm:text-lg lg:text-4xl md:text-2xl text-shadow-primary font-bold text-shadow-lg' href='https://github.com/U-K-06/Python-Quiz' target='_blank'>U.K. </a></nav>
-      <h1 className='text-primary-text text-6xl text-centre font-bold text-center'>Ready to test your <span className='text-yellow-300'>Python</span> <span className='text-blue-400'>Knowledge?</span></h1>
+      <h1 className='text-primary-text lg:text-6xl md:text-4xl sm:text-3xl text-centre font-bold text-center'>Ready to test your <span className='text-yellow-300'>Python</span> <span className='text-blue-400'>Knowledge?</span></h1>
       <p className='text-center sm:text-lg md:text-xl lg:text-2xl m-4'>Select the topic(s) on which you want to take the Quiz on.</p>
 <ul className='grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6 p-6'>
   
@@ -234,9 +234,9 @@ function Landing() {
 </div>
 <footer className='bg-card-option-default py-4 mt-auto fixed bottom-0 w-full left-0 items-center'>
   <ul className='flex justify-evenly mb-2'>
-    <li><a href="https://www.linkedin.com/in/utkarsh-khajuria-495b8831a" target='_blank'><img className='w-8 h-8' src={linkedinIcon} alt="LinkedIn Icon" /></a></li>
-    <li><a href="https://github.com/U-K-06" target='_blank'><img className='w-8 h-8' src={githubIcon} alt="GitHub Icon"/></a></li>
-    <li><a href="https://x.com/UK_06__" target='_blank'><img src={xtwitterIcon} className='w-8 h-8' alt="X/Twitter Icon" /></a></li>
+    <li><a href="https://www.linkedin.com/in/utkarsh-khajuria-495b8831a" target='_blank'><img className='lg:w-8 lg:h-8 md:w-6 md:h-6 sm:w-4 sm:h-4' src={linkedinIcon} alt="LinkedIn Icon" /></a></li>
+    <li><a href="https://github.com/U-K-06" target='_blank'><img className='lg:w-8 lg:h-8 md:w-6 md:h-6 sm:w-4 sm:h-4' src={githubIcon} alt="GitHub Icon"/></a></li>
+    <li><a href="https://x.com/UK_06__" target='_blank'><img src={xtwitterIcon} className='lg:w-8 lg:h-8 md:w-6 md:h-6 sm:w-4 sm:h-4' alt="X/Twitter Icon" /></a></li>
   </ul>
 
   <div className="text-center text-sm text-text-secondary">
