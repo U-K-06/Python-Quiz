@@ -6,62 +6,86 @@
   import rawJsonString from './questions.JSON?raw'; 
 
   const quizData = JSON.parse(rawJsonString);
-  export function select_random_topic_question(topics, data, quizData, limitKey = 3) {
+export function select_random_topic_question(topics, currentData, quizData, limitKey = 5) {
+    
+    
+    // 1. Calculate the Global Target
+    const T = topics.filter(isSelected => isSelected === 1).length;
+    const GLOBAL_TOTAL_TARGET = 8 + (2 * T); 
+    const MAX_PER_TOPIC = 10; 
+    const globalCountKey = 'total_asked'; 
 
-      const get_random_type = () => {
-          const selected_topics = topics.reduce((a, b, i) => {
-              if (b) a.push(i);
-              return a;
-          }, []);
-      
-          const end = selected_topics.length;
-          if (end === 0) return -1;
-
-          return selected_topics[Math.floor(Math.random() * end)];
-      };
-
-      const get_random_question = (qType) => {
-
-          if (data[limitKey] && data[limitKey][qType] >= 10) {
-              return -2;
-          }
-
-          const topicData = quizData.find(topic => topic.topic_id === qType);
-
-          if (!topicData || !topicData.questions) return -1;
-
+    const data = JSON.parse(JSON.stringify(currentData)); 
+    data[globalCountKey] = data[globalCountKey] || 0; 
+    
+    // 2. GLOBAL END CHECK
+    if (data[globalCountKey] >= GLOBAL_TOTAL_TARGET) {
+        return { q_type: -3, q_id: -3, updatedData: data };
+    }
+    
+    
+    const get_random_type = () => {
+        const selected_topics = topics.reduce((a, b, i) => {
+            if (b) a.push(i);
+            return a;
+        }, []);
         
-          const all_ids = topicData.questions.map(q => q.id);
+        const end = selected_topics.length;
+        if (end === 0) return -1;
+        
+        // Filter topics based on the fixed MAX_PER_TOPIC limit
+        const available_topics = selected_topics.filter(qType => {
+            const current_count = data[limitKey] && data[limitKey][qType] || 0;
+            return current_count < MAX_PER_TOPIC;
+        });
 
-          const used_ids = data[qType] || [];
+        if (available_topics.length === 0) return -2; 
 
-          const unused_ids = all_ids.filter(id => !used_ids.includes(id));
+        return available_topics[Math.floor(Math.random() * available_topics.length)];
+    };
+    
+    
+    const q_type = get_random_type();
 
-          if (unused_ids.length === 0) {
-              return -1; 
-          }
+    if (q_type < 0) { 
+        return { q_type: q_type, q_id: q_type, updatedData: data };
+    }
 
-          const randomIndex = Math.floor(Math.random() * unused_ids.length);
-          return unused_ids[randomIndex];
-      };
+    // 3. Initialize Per-Topic Counters
+    data[limitKey] = data[limitKey] || {};
+    data[limitKey][q_type] = data[limitKey][q_type] || 0;
 
-      const q_type = get_random_type();
+    // Initialize topic history array (Fixes TypeError)
+    data[q_type] = data[q_type] || [];
+    
+    // Inline logic for getting a unique question ID
+    const topicData = quizData.find(topic => topic.topic_id === q_type);
+    if (!topicData || !topicData.questions) {
+        return { q_type: q_type, q_id: -1, updatedData: data };
+    }
+    
+    const all_ids = topicData.questions.map(q => q.id);
+    const used_ids = data[q_type]; 
+    const unused_ids = all_ids.filter(id => !used_ids.includes(id));
 
-      if (q_type === -1) return { q_type: -1, q_id: -1 };
+    if (unused_ids.length === 0) {
+        return { q_type: q_type, q_id: -1, updatedData: data };
+    }
 
-      data[q_type] = data[q_type] || [];
-      data[limitKey] = data[limitKey] || {};
-      data[limitKey][q_type] = data[limitKey][q_type] || 0;
-
-      const q_id = get_random_question(q_type);
-
-      if (q_id > 0) {
-          data[limitKey][q_type]++;
-          data[q_type].push(q_id);
-      }
-
-      return { q_type, q_id };
-  }
+    const randomIndex = Math.floor(Math.random() * unused_ids.length);
+    const q_id = unused_ids[randomIndex];
+    
+    // 4. Update Counters and History
+    data[limitKey][q_type]++;      // Increment per-topic counter
+    data[globalCountKey]++;        // Increment GLOBAL counter
+    data[q_type].push(q_id);       // Push is safe now
+    
+    return { 
+      q_type, 
+       q_id, 
+        updatedData: data ,
+};
+}
 
   function Landing() { 
     const navigate = useNavigate();
@@ -88,14 +112,17 @@
     const sent = select_random_topic_question(isSelected, data, quizData);
     const questionId = sent['q_id'];
     const topicId = sent['q_type']; 
-
+    const updatedData = sent['updatedData']
+    const topicsSelectedCount = isSelected.filter(isSel => isSel === 1).length;
+    const calculatedTotal = 8 + (2 * topicsSelectedCount);
     navigate(`/Questions/${topicId}/${questionId}`, { 
       state: {
         q_id: questionId,
         t_id: topicId,
         userSelectionIndex: isSelected,
-        usedData:data,
+        usedData:updatedData,
         score:0,
+        total:calculatedTotal
       }
     }); 
   };

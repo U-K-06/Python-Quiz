@@ -37,14 +37,15 @@ function color_text(txt)
  </>}
 }
 function getQuestionByIds(quizstateData, targetTopicId, targetQuestionId) {
+  console.log(quizstateData,targetTopicId,targetQuestionId)
     const topic = quizstateData.find(topic => topic.topic_id === targetTopicId);
-
+    console.log('topic: ' , topic)
     if (!topic) {
         return null;
     }
 
     const question = topic.questions.find(q => q.id === targetQuestionId);
-
+    console.log('question: ',question)
     if (!question) {
         return null;
     }
@@ -63,9 +64,12 @@ function Question() {
   const chosenOption = a.options[ind];
 
   if (chosenOption.is_correct) {
-      setLocalScore(prevScore => prevScore + 1); 
-  }
-    setIsSelected(ind)
+      setQuizData(prevData => ({
+        ...prevData,
+        score: prevData.score + 1
+      }));
+    }
+    setIsSelected(ind);
   }
 
   useEffect(()=>{
@@ -74,37 +78,55 @@ function Question() {
   const optionClass =
     `bg-card-option-default border-2 border-transparent rounded-lg text-1xl sm:text-2xl lg:text-3xl w-full text-center py-4 px-6 flex items-center justify-center cursor-pointer transition-all duration-200 ease-in-out text-text-primary ${!isExplanationDisabled?'pointer-events-none':'hover:bg-primary/20 hover:border-primary/50'}`;
 
-  const questionId  = useParams();
+  let {tid,qid}  = useParams();
+  tid = parseInt(tid)
+  qid = parseInt(qid)
   const location = useLocation();
   const stateData = location.state || {};
-  const initialScore = stateData.score || 0;
-  const [localScore, setLocalScore] = useState(initialScore);
-  if(stateData.t_id<0 || stateData.q_id<0)
+  const [quizData,setQuizData] = useState({
+    q_id : qid,
+    t_id : tid,
+    userSelectionIndex  :  stateData.userSelectionIndex || [],
+    data : stateData.usedData || {},
+    score  : stateData.score || 0
+  })
+
+  if(tid<0 || qid<0)
   {
     console.log(stateData.userData)
     navigate(
       '/Results',{
         state:{
-          score:localScore
+          score:quizData.score,
+          total:stateData.total
         }
       }
     )
   }
-  const a = getQuestionByIds(quizstateData,stateData.t_id,stateData.q_id)
+  const a = getQuestionByIds(quizstateData,tid,qid)
+  console.log(a)
+  console.log(tid,qid)
   const get_next_function = ()=>
   {
     setIsSelected(null)
-    const data = stateData.usedData 
+
     const selected = stateData.userSelectionIndex
-    const sent = select_random_topic_question(selected,data,quizstateData)
+    const sent = select_random_topic_question(quizData.userSelectionIndex,quizData.data,quizstateData)
     const questionId = sent['q_id'];
     const topicId = sent['q_type']; 
+    const updatedData = sent['updatedData']
+    setQuizData(prevData => ({
+    ...prevData,
+    data: updatedData 
+  }));
     navigate(`/Questions/${topicId}/${questionId}`, { 
       state: {
         q_id: questionId,
         t_id: topicId,
-        userSelectionIndex: selected,
-        usedData:data
+        userSelectionIndex: quizData.userSelectionIndex,
+        usedData:updatedData,
+        score:quizData.score,
+        total:stateData.total
       }
     })
   }
@@ -152,7 +174,7 @@ function Question() {
 </ul>
           <div className="pt-8 flex justify-center">
                       <button 
-                      onClick={()=>get_next_function(localScore)}
+                      onClick={get_next_function}
                           className={`
                               bg-primary 
                               inline-block px-10 py-4 w-full max-w-xs
