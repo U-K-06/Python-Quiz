@@ -7,7 +7,35 @@ import rawJsonString from './questions.JSON?raw';
 import { select_random_topic_question } from "./Landing";
 const quizstateData = JSON.parse(rawJsonString);
 
+function color_text(txt)
+{
+ let total = ''
+ let i = 0;
+ const question_class = "text-center text-text-primary font-extrabold text-3xl sm:text-4xl lg:text-4xl border-b border-border/50 pb-6 mb-4"
+ if(txt.includes('`'))
+ {
+  for(i = txt.indexOf('`')+1;txt[i] != '`';i++)
+  {
+    total += txt[i]
+  }
+  return <p className={question_class}>
+    {txt.slice(0, txt.indexOf('`'))}
+    
 
+    <span className={'text-indigo-400 px-1'}> 
+        {total}
+    </span>
+    
+    {txt.slice(i + 1, txt.length)}
+</p>
+
+ }
+ else{
+      return   <><p className={question_class}>
+            {txt}
+          </p>
+ </>}
+}
 function getQuestionByIds(quizstateData, targetTopicId, targetQuestionId) {
     const topic = quizstateData.find(topic => topic.topic_id === targetTopicId);
 
@@ -23,11 +51,20 @@ function getQuestionByIds(quizstateData, targetTopicId, targetQuestionId) {
     return question;
 }
 
+
+
 function Question() {
   const navigate = useNavigate()
   const [isSelected, setIsSelected] = useState(null)
   const [isExplanationDisabled,setExplanation] = useState(true)
   const choose_option = (ind)=>{
+    if (isSelected !== null) return; 
+
+  const chosenOption = a.options[ind];
+
+  if (chosenOption.is_correct) {
+      setLocalScore(prevScore => prevScore + 1); 
+  }
     setIsSelected(ind)
   }
 
@@ -40,10 +77,17 @@ function Question() {
   const questionId  = useParams();
   const location = useLocation();
   const stateData = location.state || {};
+  const initialScore = stateData.score || 0;
+  const [localScore, setLocalScore] = useState(initialScore);
   if(stateData.t_id<0 || stateData.q_id<0)
   {
+    console.log(stateData.userData)
     navigate(
-      '/Results'
+      '/Results',{
+        state:{
+          score:localScore
+        }
+      }
     )
   }
   const a = getQuestionByIds(quizstateData,stateData.t_id,stateData.q_id)
@@ -70,9 +114,7 @@ function Question() {
         
         <div className="bg-card-question border border-border rounded-xl w-full max-w-2xl p-6 md:p-12 mt-12 mb-12 shadow-2xl shadow-black/50 space-y-8">
           
-          <p className="text-center text-text-primary font-extrabold text-3xl sm:text-4xl lg:text-4xl border-b border-border/50 pb-6 mb-4">
-            {a.question}
-          </p>
+      {color_text(a.question)}
           
           <p className={`
             border-l-8 border-primary 
@@ -96,7 +138,7 @@ function Question() {
                 ${(index === isSelected)
                     
                     ? (option.is_correct
-                        ? 'bg-correct/80 border-correct shadow-lg shadow-correct/30 '   
+                        ? ('bg-correct/80 border-correct shadow-lg shadow-correct/30 ')  
                         : 'bg-wrong/80 border-wrong shadow-lg shadow-wrong/30 ')      
                     : ''
                 }
@@ -110,7 +152,7 @@ function Question() {
 </ul>
           <div className="pt-8 flex justify-center">
                       <button 
-                      onClick={get_next_function}
+                      onClick={()=>get_next_function(localScore)}
                           className={`
                               bg-primary 
                               inline-block px-10 py-4 w-full max-w-xs

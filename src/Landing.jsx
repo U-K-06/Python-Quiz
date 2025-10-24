@@ -6,7 +6,7 @@
   import rawJsonString from './questions.JSON?raw'; 
 
   const quizData = JSON.parse(rawJsonString);
-  export function select_random_topic_question(topics, data, quizData, limitKey = 0) {
+  export function select_random_topic_question(topics, data, quizData, limitKey = 3) {
 
       const get_random_type = () => {
           const selected_topics = topics.reduce((a, b, i) => {
@@ -22,7 +22,7 @@
 
       const get_random_question = (qType) => {
 
-          if (data[limitKey] && data[limitKey][qType] >= 2) {
+          if (data[limitKey] && data[limitKey][qType] >= 10) {
               return -2;
           }
 
@@ -94,7 +94,8 @@
         q_id: questionId,
         t_id: topicId,
         userSelectionIndex: isSelected,
-        usedData:data
+        usedData:data,
+        score:0,
       }
     }); 
   };
@@ -230,8 +231,9 @@
     className={
       'bg-primary ' +
       'inline-block px-10 py-4 w-fit ' +
-      'rounded-lg text-2xl font-bold text-gray-100 ' +
-      'shadow-2xl tracking-wider ' +
+      'rounded-lg text-2xl font-bold ' +
+      'shadow-2xl tracking-wider' + 
+      (!isSubmitDisabled ? 'text-gray-100' : 'text-gray-') +      
       'hover:bg-blue-600 active:scale-[0.98] transition-all duration-200 cursor-pointer'
     }
   >
