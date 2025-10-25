@@ -9,7 +9,6 @@
 export function select_random_topic_question(topics, currentData, quizData, limitKey = 5) {
     
     
-    // 1. Calculate the Global Target
     const T = topics.filter(isSelected => isSelected === 1).length;
     const GLOBAL_TOTAL_TARGET = 8 + (2 * T); 
     const MAX_PER_TOPIC = 10; 
@@ -18,7 +17,6 @@ export function select_random_topic_question(topics, currentData, quizData, limi
     const data = JSON.parse(JSON.stringify(currentData)); 
     data[globalCountKey] = data[globalCountKey] || 0; 
     
-    // 2. GLOBAL END CHECK
     if (data[globalCountKey] >= GLOBAL_TOTAL_TARGET) {
         return { q_type: -3, q_id: -3, updatedData: data };
     }
@@ -33,7 +31,6 @@ export function select_random_topic_question(topics, currentData, quizData, limi
         const end = selected_topics.length;
         if (end === 0) return -1;
         
-        // Filter topics based on the fixed MAX_PER_TOPIC limit
         const available_topics = selected_topics.filter(qType => {
             const current_count = data[limitKey] && data[limitKey][qType] || 0;
             return current_count < MAX_PER_TOPIC;
@@ -51,14 +48,11 @@ export function select_random_topic_question(topics, currentData, quizData, limi
         return { q_type: q_type, q_id: q_type, updatedData: data };
     }
 
-    // 3. Initialize Per-Topic Counters
     data[limitKey] = data[limitKey] || {};
     data[limitKey][q_type] = data[limitKey][q_type] || 0;
 
-    // Initialize topic history array (Fixes TypeError)
     data[q_type] = data[q_type] || [];
     
-    // Inline logic for getting a unique question ID
     const topicData = quizData.find(topic => topic.topic_id === q_type);
     if (!topicData || !topicData.questions) {
         return { q_type: q_type, q_id: -1, updatedData: data };
@@ -75,10 +69,9 @@ export function select_random_topic_question(topics, currentData, quizData, limi
     const randomIndex = Math.floor(Math.random() * unused_ids.length);
     const q_id = unused_ids[randomIndex];
     
-    // 4. Update Counters and History
-    data[limitKey][q_type]++;      // Increment per-topic counter
-    data[globalCountKey]++;        // Increment GLOBAL counter
-    data[q_type].push(q_id);       // Push is safe now
+    data[limitKey][q_type]++;      
+    data[globalCountKey]++;        
+    data[q_type].push(q_id);       
     
     return { 
       q_type, 
@@ -128,26 +121,26 @@ export function select_random_topic_question(topics, currentData, quizData, limi
   };
     return (
       <>
-        <div class="absolute inset-0 overflow-hidden pointer-events-none">
-          <span class="falling-question-mark fall-slow left-1/4 delay-1">?</span>
-          <span class="falling-question-mark fall-slow right-1/12 delay-7">?</span>
-          <span class="falling-question-mark fall-slow right-1/3 delay-4">?</span>
+        <div className="absolute inset-0 overflow-hidden pointer-events-none">
 
-          <span class="falling-question-mark fall-medium right-1/2 delay-5">?</span>
-          <span class="falling-question-mark fall-medium right-1/5 delay-2">?</span>
-          <span class="falling-question-mark fall-medium left-1/3 delay-6">?</span>
+        <span className="falling-question-mark fall-slow left-1/4 delay-1 text-3xl md:text-6xl lg:text-8xl">?</span>
+        <span className="falling-question-mark fall-slow right-1/12 delay-7 text-xl md:text-5xl lg:text-7xl">?</span>
+        <span className="falling-question-mark fall-slow right-1/3 delay-4 text-4xl md:text-7xl lg:text-9xl">?</span>
 
-          <span class="falling-question-mark fall-fast right-2/4 delay-3">?</span>
-          <span class="falling-question-mark fall-fast left-4/5 delay-1">?</span>
+        <span className="falling-question-mark fall-medium right-1/2 delay-5 text-2xl md:text-4xl lg:text-6xl">?</span>
+        <span className="falling-question-mark fall-medium right-1/5 delay-2 text-xl md:text-6xl lg:text-8xl">?</span>
+        <span className="falling-question-mark fall-medium left-1/3 delay-6 text-3xl md:text-5xl lg:text-7xl">?</span>
 
-          <span class="falling-question-mark fall-medium left-1/10" style={{ animationDelay: '9s' }}>?</span>
 
-          <span class="falling-question-mark fall-fast right-3/4" style={{ animationDelay: '0s' }}>?</span>
+        <span className="falling-question-mark fall-fast right-2/4 delay-3 text-2xl md:text-7xl lg:text-9xl">?</span>
+        <span className="falling-question-mark fall-fast left-4/5 delay-1 text-xl md:text-4xl lg:text-6xl">?</span>
 
-        </div>
-        <nav><a className='sm:text-lg lg:text-4xl md:text-2xl text-shadow-primary font-bold text-shadow-lg' href='https://github.com/U-K-06/Python-Quiz' target='_blank'>U.K. </a></nav>
-        <h1 className='text-primary-text lg:text-6xl md:text-4xl sm:text-3xl text-centre font-bold text-center'>Ready to test your <span className='text-yellow-300'>Python</span> <span className='text-blue-400'>Knowledge?</span></h1>
-        <p className='text-center sm:text-lg md:text-xl lg:text-2xl m-4'>Select the topic(s) on which you want to take the Quiz on.</p>
+        <span className="falling-question-mark fall-medium left-1/10 text-3xl md:text-6xl lg:text-8xl" style={{ animationDelay: '9s' }}>?</span>
+        <span className="falling-question-mark fall-fast right-3/4 text-xl md:text-5xl lg:text-7xl" style={{ animationDelay: '0s' }}>?</span>
+      </div>
+        <nav><a className='sm:text-lg lg:text-4xl md:text-2xl sm:px-4 text-shadow-primary font-bold text-shadow-lg' href='https://github.com/U-K-06/Python-Quiz' target='_blank'>U.K. </a></nav>
+        <h1 className='text-primary-text lg:text-6xl md:text-5xl sm:text-3xl text-centre font-bold text-2xl text-center'>Ready to test your <span className='text-yellow-300'>Python</span> <span className='text-blue-400'>Knowledge?</span></h1>
+        <p className='text-center sm:text-lg md:text-xl lg:text-2xl m-4 text-xl'>Select the topic(s) on which you want to take the Quiz on.</p>
   <ul className='grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6 p-6'>
     
     <li onClick={()=>selectTopic(0)} 
@@ -252,7 +245,7 @@ export function select_random_topic_question(topics, currentData, quizData, limi
       </svg>
     </li>
   </ul>
-  <div className={`flex justify-center mt-10 mb-8 w-full ${isSubmitDisabled?'opacity-50 pointer-events-none':''}`}> 
+  <div className={`flex justify-center mt-10 mb-20 w-full ${isSubmitDisabled?'opacity-50 pointer-events-none':''}`}> 
   <button
   onClick={send_qid_tid}
     className={

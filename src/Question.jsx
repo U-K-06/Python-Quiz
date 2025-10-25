@@ -172,7 +172,7 @@ function Question() {
         </li>
     ))}
 </ul>
-          <div className="pt-8 flex justify-center">
+          <div className="pt-2 flex justify-center">
                       <button 
                       onClick={get_next_function}
                           className={`
