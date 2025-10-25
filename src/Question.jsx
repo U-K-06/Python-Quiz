@@ -134,7 +134,7 @@ function Question() {
     <>
       <div className="flex items-center justify-center min-h-screen bg-background p-4 sm:p-8 lg:p-12">
         
-        <div className="bg-card-question border border-border rounded-xl w-full max-w-2xl p-6 md:p-12 mt-12 mb-12 shadow-2xl shadow-black/50 space-y-8">
+        <div className="bg-card-question border border-border rounded-xl w-full max-w-2xl p-6 md:p-12  mb-30 shadow-2xl shadow-black/50 space-y-8">
           
       {color_text(a.question)}
           
