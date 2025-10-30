@@ -3,4 +3,4 @@ Basic web app written using **React** and **Tailwind** to allow the user to take
 
 
 
-Access it at: https://python-quiz.pages.dev/
+<p>Access it <a href='https://python-quiz.pages.dev/' target='_blank'>here</a></p>
